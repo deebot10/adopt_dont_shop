@@ -26,5 +26,6 @@ RSpec.describe 'Application Show' do
     expect(page).to have_content(@applicant.city)
     expect(page).to have_content(@applicant.state)
     expect(page).to have_content(@applicant.zip_code)
+    expect(page).to have_content(@applicant.description)
   end
 end
