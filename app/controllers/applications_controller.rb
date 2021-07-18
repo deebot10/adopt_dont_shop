@@ -9,4 +9,9 @@ class ApplicationsController < ApplicationController
     applicant = Application.create!(applicant_params)
     redirect_to "/applications/#{applicant.id}"     
   end
+
+  private
+  def applicant_params
+    params.permit(:name, :address, :city, :state, :zip_code)    
+  end
 end
