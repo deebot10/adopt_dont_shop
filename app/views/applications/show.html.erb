@@ -1,0 +1,13 @@
+<h1>Application Show Page</h1>
+
+<ul>
+  <li>Name: <%= @applicant.name%> </li>
+  <li>Address: <%= @applicant.address%>, <%= @applicant.city%>, <%= @applicant.state%>, <%= @applicant.zip_code%> </li>
+  <li>Description: <%= @applicant.description%></li>
+  <li>Status: <%= @applicant.status%></li>
+</ul>
+
+<h3>Pets on Application</h3>
+<% @applicant.pets.each do |pet|%>
+  <a href= <%="/pets/#{pet.id}"%>><%= "#{pet.name}"%></a>
+<%end%>  

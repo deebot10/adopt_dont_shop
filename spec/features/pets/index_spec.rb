@@ -81,4 +81,27 @@ RSpec.describe 'the pets index' do
     expect(page).to have_content(pet_2.name)
     expect(page).to_not have_content(pet_3.name)
   end
+  
+  #User Story2 :in progress
+  it 'has a link to create applications' do
+
+    visit '/pets'
+    
+    click_button 'Start an Application'
+
+    expect(current_path).to eq('/applications/new')
+
+    fill_in 'Name',     with: 'Dee'
+    fill_in 'Address',  with: '124 Oak St.'
+    fill_in 'City',     with: 'Dallas'
+    fill_in 'State' ,   with: 'Tx'
+    fill_in 'Zip Code', with: 27854
+    click_on("Submit")
+    
+    applicant = Application.last
+
+    expect(current_path).to eq("/applications/#{applicant.id}")
+
+    expect(page).to have_content('Dee')
+  end
 end
