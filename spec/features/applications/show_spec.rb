@@ -32,15 +32,7 @@ RSpec.describe 'Application Show' do
     expect(current_path).to eq("/pets/#{@pet_1.id}")
   end
   
-  #   As a visitor UserStory3
-  # When I visit an application's show page
-  # And that application has not been submitted,
-  # Then I see a section on the page to "Add a Pet to this Application"
-  # In that section I see an input where I can search for Pets by name
-  # When I fill in this field with a Pet's name
-  # And I click submit,
-  # Then I am taken back to the application show page
-  # And under the search bar I see any Pet whose name matches my search
+  #UserStory3
   it 'has a section to add a pet to an application' do
     applicant = Application.create!(name: 'Dee', address: '123 Oak St.', city: 'Austin', state: 'Tx', zip_code: 13546, description: "I'd be a ok owner", status: 'Pending')
     shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9) 
@@ -51,6 +43,22 @@ RSpec.describe 'Application Show' do
     expect(page).to_not have_content(pet.name)
     
     fill_in 'Name', with: 'Lucille Bald'
+    click_button 'Submit'
+
+    expect(page).to have_content(pet.name)
+  end
+  
+
+  it 'can be case insensitive to search' do
+    applicant = Application.create!(name: 'Dee', address: '123 Oak St.', city: 'Austin', state: 'Tx', zip_code: 13546, description: "I'd be a ok owner", status: 'Pending')
+    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9) 
+    pet = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: shelter.id)
+    
+    visit application_path(applicant)
+
+    expect(page).to_not have_content(pet.name)
+    
+    fill_in 'Name', with: 'LuCilLE BAld'
     click_button 'Submit'
 
     expect(page).to have_content(pet.name)
