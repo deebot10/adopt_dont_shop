@@ -41,7 +41,18 @@ RSpec.describe 'Application Show' do
   # And I click submit,
   # Then I am taken back to the application show page
   # And under the search bar I see any Pet whose name matches my search
-  xit 'has a section to add a pet to an application' do
-      
+  it 'has a section to add a pet to an application' do
+    applicant = Application.create!(name: 'Dee', address: '123 Oak St.', city: 'Austin', state: 'Tx', zip_code: 13546, description: "I'd be a ok owner", status: 'Pending')
+    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9) 
+    pet = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: shelter.id)
+    
+    visit application_path(applicant)
+
+    expect(page).to_not have_content(pet.name)
+    
+    fill_in 'Name', with: 'Lucille Bald'
+    click_button 'Submit'
+
+    expect(page).to have_content(pet.name)
   end
 end
