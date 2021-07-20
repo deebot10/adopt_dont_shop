@@ -3,7 +3,8 @@ class ApplicationsController < ApplicationController
     @applicant = Application.find(params[:id])   
     pet = Pet.find_pet(params[:name])
     if pet.present?
-      @applicant.pets << pet 
+      @applicant.pets << pet
+    end 
   end    
 
   def new;end
