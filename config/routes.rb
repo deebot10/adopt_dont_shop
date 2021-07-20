@@ -39,4 +39,6 @@ Rails.application.routes.draw do
   
   post 'applications/:id', to: 'applications#show'
   resources :applications, only: [:show, :new, :create]
+
+  get '/admin/shelters', to: 'admin_shelters#index'
 end

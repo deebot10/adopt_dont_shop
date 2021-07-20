@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_07_17_221254) do
     t.string "city"
     t.string "state"
     t.integer "zip_code"
-    t.string "status"
+    t.string "status" 
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
