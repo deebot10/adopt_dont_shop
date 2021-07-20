@@ -12,7 +12,7 @@
   <a href= <%="/pets/#{pet.id}"%>><%= "#{pet.name}"%></a>
 <%end%>  
 
-<%= form_with url: "/appications/#{@applicant.id}", local: true, method: :post do |f| %>
+<%= form_with url: "/applications/#{@applicant.id}", local: true, method: :post do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.submit 'Submit' %>
