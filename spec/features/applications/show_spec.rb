@@ -81,4 +81,15 @@ RSpec.describe 'Application Show' do
       expect(page).to have_content('Pending')
     end
   end
+
+  describe 'No pets on an application' do
+    it 'wont show submit if not pets are on an app' do
+      applicant = Application.create!(name: 'Dee', address: '123 Oak St.', city: 'Austin', state: 'Tx', zip_code: 13546, description: "I'd be a ok owner", status: 0)
+      shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9) 
+      
+      visit application_path(applicant)
+      
+      expect(page).to_not have_content('Submit an Application')
+    end
+  end
 end
