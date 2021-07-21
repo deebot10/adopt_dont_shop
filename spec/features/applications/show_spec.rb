@@ -67,16 +67,18 @@ RSpec.describe 'Application Show' do
   describe 'submit an application' do
     it 'can submit once pets are added to an application' do
 
-      expect(page).to have_content('Submit an Application')
-
-      fill_in 'Description', with: 'I love Animals'
-      click_button 'Submit'
       
-      expect(current_path).to eq("/applications/#{@applicant}")
+      within('section#pending') do
+        expect(page).to have_content('Submit an Application')
+        fill_in 'Description', with: 'I love Animals'
+        click_button 'Submit'
+      end
+      
+      expect(current_path).to eq("/applications/#{@applicant.id}")
 
       expect(page).to have_content(@pet_1.name)
       expect(page).to have_content(@pet_1.name)
-      expect(page).to have_content(@applicant.status == 'Pending')
+      expect(page).to have_content('Pending')
     end
   end
 end

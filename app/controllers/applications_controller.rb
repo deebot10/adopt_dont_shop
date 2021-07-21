@@ -5,6 +5,7 @@ class ApplicationsController < ApplicationController
     if pet.present?
       @applicant.pets << pet
       @applicant.status = 1
+      # require 'pry'; binding.pry
     end 
   end    
 
