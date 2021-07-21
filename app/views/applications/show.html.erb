@@ -11,3 +11,24 @@
 <% @applicant.pets.each do |pet|%>
   <a href= <%="/pets/#{pet.id}"%>><%= "#{pet.name}"%></a>
 <%end%>  
+
+<%= form_with url: "/applications/#{@applicant.id}", local: true, method: :post do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Submit' %>
+<%end%>
+
+<% if @applicant.pets.present? == true %>
+  <% @applicant.status = 1 %>
+  <% @applicant.save %>
+
+  <section id='pending'>
+    <p> Submit an Application</p>
+
+    <%= form_with url: "/applications/#{@applicant.id}", local: true, method: :post do |f| %>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+      <%= f.submit 'Submit' %>
+    <%end%>
+  </section>
+<%end%>

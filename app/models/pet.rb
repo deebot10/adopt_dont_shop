@@ -13,4 +13,8 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def self.find_pet(name)
+    where('lower(name) LIKE lower(?)', "#{name}")
+  end
 end
