@@ -16,6 +16,10 @@ class Shelter < ApplicationRecord
       .order("pets_count DESC")
   end
 
+  def self.admin_order
+    find_by_sql('SELECT shelters.* FROM shelters ORDER BY shelters. name DESC')
+  end
+
   def pet_count
     pets.count
   end
@@ -31,8 +35,12 @@ class Shelter < ApplicationRecord
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
   end
+  
+  # def info
+  #   find_by_sql('SELECT name, city FROM shelters')      
+  # end
 
-  def self.admin_order
-    find_by_sql('SELECT shelters.* FROM shelters ORDER BY shelters. name DESC')
-  end
+  # def info
+  #   .select(:name, :city)
+  # end
 end
