@@ -1,5 +1,12 @@
 <h1>Admin Shelter Index</h1>
 
-<% @shelters.each do |shelter|%>
+<% @shelters.admin_order.each do |shelter|%>
   <p><%= shelter.name %></p>
 <%end%>
+
+<section id='pending'>
+  <h3>Shelters with Pending Applications</h3>
+  <% @shelters.pending_apps.each do |shelter| %>
+    <p><%= shelter.name %></p>
+  <%end%>
+</section>
