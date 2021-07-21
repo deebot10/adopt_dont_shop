@@ -4,8 +4,6 @@ class ApplicationsController < ApplicationController
     pet = Pet.find_pet(params[:name])
     if pet.present?
       @applicant.pets << pet
-      @applicant.status = 1
-      # require 'pry'; binding.pry
     end 
   end    
 
