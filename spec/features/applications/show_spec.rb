@@ -88,8 +88,25 @@ RSpec.describe 'Application Show' do
       shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9) 
       
       visit application_path(applicant)
-      
+
       expect(page).to_not have_content('Submit an Application')
+    end
+  end
+
+  describe 'Partial matches for Pet Names' do
+    xit 'can search for pets with partial names' do
+      applicant = Application.create!(name: 'Dee', address: '123 Oak St.', city: 'Austin', state: 'Tx', zip_code: 13546, description: "I'd be a ok owner", status: 0)
+      shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9) 
+      pet = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: shelter.id)
+      
+      visit application_path(applicant)
+
+      expect(page).to_not have_content(pet.name)
+      
+      fill_in 'Name', with: 'LuCilLE'
+      click_button 'Submit'
+
+      expect(page).to have_content(pet.name)  
     end
   end
 end

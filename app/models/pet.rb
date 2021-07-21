@@ -15,6 +15,6 @@ class Pet < ApplicationRecord
   end
 
   def self.find_pet(name)
-    where('lower(name) = lower(?)', "#{name}")
+    where('lower(name) LIKE lower(?)', "#{name}")
   end
 end
