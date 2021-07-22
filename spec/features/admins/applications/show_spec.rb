@@ -18,15 +18,23 @@ RSpec.describe 'Admin App Show' do
         within("#pet-#{@pet_1.id}") do
            expect(page).to have_selector(:link_or_button, 'Accept Application')
            click_button 'Accept Application'
+           expect(current_path).to eq(admin_application_path(@applicant))
+           expect(page).to have_content('Accepted')
+           expect(page).to_not have_selector(:link_or_button, 'Accept Application')
         end
-        
-        expect(current_path).to eq(admin_application_path(@applicant))
-        save_and_open_page
-       
-       within("#pet-#{@pet_1.id}") do
-          expect(page).to have_content('Accepted')
-          expect(page).to_not have_selector(:link_or_button, 'Accept Application')
+    end
+    
+    describe 'Reject a Pet for adoption' do
+        it 'can reject a pet for adoption' do
+            
+        within("#pet-#{@pet_2.id}") do
+            expect(page).to have_selector(:link_or_button, 'Reject Application')
+            click_button 'Reject Application'
+            expect(current_path).to eq(admin_application_path(@applicant))
+            expect(page).to have_content('Rejected')
+            expect(page).to_not have_selector(:link_or_button, 'Reject Application')
         end
+      end    
     end
   end
 end
