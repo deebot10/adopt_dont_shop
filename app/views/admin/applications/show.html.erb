@@ -1,0 +1,15 @@
+<h1>Admin Application Show</h1>
+
+  <% @app.pets.each do |pet| %>
+    <section id="pet-<%=pet.id%>">
+      <p><%= pet.name%></p> 
+      <%if pet.adoptable && params[:status].nil? %>
+        <h3><%= button_to "Accept Application", admin_application_path(app_id: @app.id, pet_id: pet.id, status: 'Accept'), method: :patch %> </h3>
+        <h3><%= button_to "Reject Application", admin_application_path(app_id: @app.id, pet_id: pet.id, status: 'Reject'), method: :patch %> </h3>
+      <%elsif params[:status] == 'Accepted' %>  
+        <p>status: Accepted</p>
+      <%elsif params[:status] == 'Rejected' %> 
+         <p>Status: Rejected </p>
+      <%end%>
+    </section>
+<%end%>

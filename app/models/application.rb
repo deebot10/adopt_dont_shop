@@ -8,5 +8,9 @@ class Application < ApplicationRecord
   has_many :pet_applications
   has_many :pets, through: :pet_applications        
 
-  enum status: ['In Progress', 'Pending', 'Accepted', 'Regected']
+  enum status: ['In Progress', 'Pending', 'Accepted', 'Rejected']
+
+  def pet_status(status) 
+    status == 'Accept'    
+  end
 end
