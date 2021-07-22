@@ -68,7 +68,7 @@ RSpec.describe 'Application Show' do
     it 'can submit once pets are added to an application' do
 
       
-      within('section#pending') do
+      within('#pending') do
         expect(page).to have_content('Submit an Application')
         fill_in 'Description', with: 'I love Animals'
         click_button 'Submit'
